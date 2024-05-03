@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaUser } from "react-icons/fa";
 import '../styles/Header.css'
+import { textDecoration } from '@chakra-ui/react';
 
 const Header = () => {
   return (

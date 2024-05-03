@@ -1,6 +1,6 @@
 .recipe-card-grid-title {
     margin: 2rem;
-    font-family: "League Spartan", sans-serif;
+    font-family: var(--spartan-font), sans-serif;
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
@@ -14,9 +14,10 @@
 .recipe-card-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    
+    justify-content:left;
 
-    font-family: "League Spartan", sans-serif;
+    font-family: var(--spartan-font), sans-serif;
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
@@ -28,7 +29,9 @@
 }
 
 .recipe-card-grid-container {
+    flex-grow: 1;
     background-color: var(--dark-tan);
     color: var(--dark-green);
     border-radius: 30px;
+    margin: 2rem;
 }

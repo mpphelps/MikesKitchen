@@ -1,9 +1,11 @@
 import React from 'react'
 import '../styles/RecipeCard.css'
 
-const RecipeCard = () => {
+const RecipeCard = ({title}) => {
   return (
-    <div className='recipe-card'>RecipeCard</div>
+    <div className='recipe-card'>
+      {title}
+    </div>
   )
 }
 

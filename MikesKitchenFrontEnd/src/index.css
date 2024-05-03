@@ -6,6 +6,8 @@
   --dark-tan: #ECEAE3;
   --dark-dark-tan: #B9B4A5;
   --red-brown: #8B2A2A;
+  --spartan-font: "League Spartan";
+  --grand-hotel-font: "Grand Hotel";
 
   background-color: var(--mid-tan);
 }

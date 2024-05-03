@@ -16,7 +16,7 @@
     border: none;
     outline: none;
     background: none;
-    font-family: "League Spartan", sans-serif;
+    font-family: var(--spartan-font), sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
