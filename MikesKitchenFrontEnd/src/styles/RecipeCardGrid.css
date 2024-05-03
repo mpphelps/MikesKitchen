@@ -1,0 +1,37 @@
+.recipe-card-grid-title {
+    margin: 2rem;
+    font-family: var(--spartan-font), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 2rem;
+    color: var(--dark-green);
+    text-align: center;
+    border-bottom: solid thin var(--red-brown);
+    
+}
+
+.recipe-card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    
+    justify-content:left;
+
+    font-family: var(--spartan-font), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1.5rem;
+    border-radius: 30px;
+    text-align: center;
+    margin: 1rem;
+    padding: 0rem;
+}
+
+.recipe-card-grid-container {
+    flex-grow: 1;
+    background-color: var(--dark-tan);
+    color: var(--dark-green);
+    border-radius: 30px;
+    margin: 2rem;
+}

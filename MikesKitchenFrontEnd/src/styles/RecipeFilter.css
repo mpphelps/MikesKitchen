@@ -1,0 +1,15 @@
+.recipe-filter {
+    background-color: var(--dark-tan);
+    color: var(--dark-green);
+    font-family: var(--spartan-font), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1.5rem;
+    border-radius: 30px;
+    text-align: center;
+    margin: 2rem;
+    padding: 1rem;
+    width: 183px;
+    height: 1000px;
+}
