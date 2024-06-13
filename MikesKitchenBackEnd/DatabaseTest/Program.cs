@@ -16,6 +16,7 @@ public static class Program
 
 public class MikesKitchenDatabaseTest
 {
+	
 	public void PrintRecipe(int id)
 	{
 		using (MikesKitchenContext db = new MikesKitchenContext())
@@ -31,11 +32,10 @@ public class MikesKitchenDatabaseTest
 			}
 		}
 	}
-	public void AddTestUser()
-	{
-		using (MikesKitchenContext db = new MikesKitchenContext())
-		{
-			var testUser = new User()
+
+    private User TestUser { 
+		get {
+			return new User()
 			{
 				Email = "test@test.com",
 				UserName = "Test",
@@ -43,8 +43,15 @@ public class MikesKitchenDatabaseTest
 				LastName = "Testlastname",
 				Password = "Password"
 			};
+		}
+		set { } 
+	}
 
-			db.Users?.Add(testUser);
+    public void AddTestUser()
+	{
+		using (MikesKitchenContext db = new MikesKitchenContext())
+		{
+			db.Users?.Add(TestUser);
 			int affected = db.SaveChanges();
 			if (affected == 1)
                 Console.WriteLine($"Test user added");
@@ -57,16 +64,7 @@ public class MikesKitchenDatabaseTest
 	{
 		using (MikesKitchenContext db = new MikesKitchenContext())
 		{
-			var testUser = new User()
-			{
-				Email = "test@test.com",
-				UserName = "Test",
-				FirstName = "Testfirstname",
-				LastName = "Testlastname",
-				Password = "Password"
-			};
-
-			db.Users?.Add(testUser);
+			db.Users?.Add(TestUser);
 			var affected = await db.SaveChangesAsync();
 			if (affected == 1)
 				Console.WriteLine($"Test user added");
@@ -79,7 +77,7 @@ public class MikesKitchenDatabaseTest
 	{
 		using (MikesKitchenContext db = new MikesKitchenContext())
 		{
-			var testUser = db.Users.FirstOrDefault(u => u.Email == "test@test.com");
+			var testUser = db.Users.FirstOrDefault(u => u.Email == TestUser.Email);
 
 			if (testUser == null)
 			{
@@ -100,7 +98,7 @@ public class MikesKitchenDatabaseTest
 	{
 		using (MikesKitchenContext db = new MikesKitchenContext())
 		{
-			var testUser = await db.Users.FirstOrDefaultAsync(u => u.Email == "test@test.com");
+			var testUser = await db.Users.FirstOrDefaultAsync(u => u.Email == TestUser.Email);
 
 			if (testUser == null)
 			{
