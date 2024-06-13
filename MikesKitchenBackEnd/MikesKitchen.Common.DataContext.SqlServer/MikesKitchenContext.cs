@@ -28,7 +28,6 @@ public partial class MikesKitchenContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=MikesKitchen;Integrated Security=true;Encrypt=false");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -37,7 +36,7 @@ public partial class MikesKitchenContext : DbContext
         {
             entity.HasKey(e => e.RecipeId).HasName("PK__Recipes__FDD988B08DADB37A");
 
-            entity.Property(e => e.RecipeId).ValueGeneratedNever();
+            //entity.Property(e => e.RecipeId).ValueGeneratedNever();
 
             entity.HasOne(d => d.ServesDescriptor).WithMany(p => p.Recipes)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -74,17 +73,17 @@ public partial class MikesKitchenContext : DbContext
         {
             entity.HasKey(e => e.ServesDescriptorId).HasName("PK__ServesDe__F4B29F657004D445");
 
-            entity.Property(e => e.ServesDescriptorId).ValueGeneratedNever();
+            //entity.Property(e => e.ServesDescriptorId).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<Unit>(entity =>
         {
-            entity.Property(e => e.UnitId).ValueGeneratedNever();
+            //entity.Property(e => e.UnitId).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.Property(e => e.UserId).ValueGeneratedNever();
+            //entity.Property(e => e.UserId).ValueGeneratedNever();
 
             entity.HasMany(d => d.Recipes).WithMany(p => p.Users)
                 .UsingEntity<Dictionary<string, object>>(
