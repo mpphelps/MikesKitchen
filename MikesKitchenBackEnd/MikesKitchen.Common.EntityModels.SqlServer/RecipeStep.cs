@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace MikesKitchen.Common;
+namespace MikesKitchen.Common.EntityModels.SqlServer;
 
 [PrimaryKey("RecipeId", "StepId")]
 public partial class RecipeStep

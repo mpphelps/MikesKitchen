@@ -1,11 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using MikesKitchen.Common;
-using MikesKitchen.WebApi.Repositories;
+using MikesKitchen.Common.Core.Interfaces;
+using MikesKitchen.Common.Core.Services;
+using MikesKitchen.Common.DataContext.SqlServer.Interfaces;
+using MikesKitchen.Common.DataContext.SqlServer.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Register the repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

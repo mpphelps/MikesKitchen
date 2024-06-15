@@ -1,18 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <Folder Include="Enums\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MikesKitchen.Common.Core\MikesKitchen.Common.Core.csproj" />
     <ProjectReference Include="..\MikesKitchen.Common.DataContext.SqlServer\MikesKitchen.Common.DataContext.SqlServer.csproj" />
     <ProjectReference Include="..\MikesKitchen.Common.EntityModels.SqlServer\MikesKitchen.Common.EntityModels.SqlServer.csproj" />
   </ItemGroup>

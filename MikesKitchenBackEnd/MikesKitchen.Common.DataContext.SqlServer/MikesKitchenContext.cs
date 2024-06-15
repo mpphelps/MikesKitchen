@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using MikesKitchen.Common.EntityModels.SqlServer;
 
-namespace MikesKitchen.Common;
+namespace MikesKitchen.Common.DataContext.SqlServer;
 
 public partial class MikesKitchenContext : DbContext
 {
