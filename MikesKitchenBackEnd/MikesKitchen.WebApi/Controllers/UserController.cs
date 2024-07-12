@@ -41,9 +41,10 @@ namespace MikesKitchen.WebApi.Controllers
 		}
 
 		// PUT api/<UserController>/5
-		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] string value)
+		[HttpPut]
+		public void Put([FromBody] User user)
 		{
+			_userService.Update(user);
 		}
 
 		// DELETE api/<UserController>/5

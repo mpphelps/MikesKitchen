@@ -66,10 +66,15 @@ public class UserRepository : IUserRepository
 	{
 		using (MikesKitchenContext db = new MikesKitchenContext())
 		{
-			var tempUser = db.Users.First(u => u.UserId == user.UserId);
-			if (tempUser != null)
+			var existingUser = db.Users.First(u => u.UserId == user.UserId);
+			if (existingUser != null)
 			{
-				user = db.Update<User>(user).Entity;
+				existingUser.FirstName = user.FirstName;
+				existingUser.LastName = user.LastName;
+				existingUser.Email = user.Email;
+				existingUser.Password = user.Password;
+				existingUser.UserName = user.UserName;
+				db.SaveChanges();
 			}
 			else
 			{
