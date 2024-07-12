@@ -10,7 +10,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
     public partial class AddUserSeedData : Migration
     {
         /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
+        protected override void Up(MigrationBuilder migrationBuilder) 
         {
             migrationBuilder.InsertData(
                 table: "Users",
