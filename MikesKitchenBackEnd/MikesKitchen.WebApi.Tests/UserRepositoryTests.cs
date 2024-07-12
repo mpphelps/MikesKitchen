@@ -1,8 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-using MikesKitchen.Common;
-using MikesKitchen.WebApi.Repositories;
-using Moq;
-using System.Collections.Generic;
+using MikesKitchen.Common.DataContext.SqlServer.Repositories;
+using MikesKitchen.Common.EntityModels.SqlServer;
 
 namespace MikesKitchen.WebApi.Tests
 {
@@ -33,7 +30,7 @@ namespace MikesKitchen.WebApi.Tests
 			};
 
 			// Act
-			var result = await repository.CreateAsync(user);
+			var result = repository.Create(user);
 
 			// Assert
 			Assert.AreEqual(user, result);

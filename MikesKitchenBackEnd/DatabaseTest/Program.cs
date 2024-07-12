@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MikesKitchen.Common;
+using MikesKitchen.Common.DataContext.SqlServer;
+using MikesKitchen.Common.EntityModels.SqlServer;
 
 public static class Program
 {

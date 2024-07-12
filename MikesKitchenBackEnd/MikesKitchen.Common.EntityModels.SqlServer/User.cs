@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 
 namespace MikesKitchen.Common.EntityModels.SqlServer;
@@ -15,7 +16,7 @@ public partial class User
 	[RegularExpression(@"^[A-Z][a-z]*(?:[-' ][A-Z][a-z]*)*$", ErrorMessage = "First name must start with a capital letter and contain only letters, hyphens, apostrophes, or spaces.")]
 	public string FirstName { get; set; } = null!;
 
-    [StringLength(50)]
+	[StringLength(50)]
 	[RegularExpression(@"^[A-Z][a-z]*(?:[-' ][A-Z][a-z]*)*$", ErrorMessage = "Last name must start with a capital letter and contain only letters, hyphens, apostrophes, or spaces.")]
 	public string LastName { get; set; } = null!;
 

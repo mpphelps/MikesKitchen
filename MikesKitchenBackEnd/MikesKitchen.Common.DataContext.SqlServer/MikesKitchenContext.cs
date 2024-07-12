@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MikesKitchen.Common.EntityModels.SqlServer;
 
 namespace MikesKitchen.Common.DataContext.SqlServer;
@@ -102,7 +100,25 @@ public partial class MikesKitchenContext : DbContext
                         j.HasKey("UserId", "RecipeId").HasName("PK_RecipeFavorites");
                         j.ToTable("Favorites");
                     });
-        });
+
+            entity.HasData(new User
+            {
+                UserId = 2,
+                FirstName = "Sofia",
+                LastName = "Lazaro",
+                Email = "sclazaro@gmail.com",
+                Password = "Password",
+                UserName = "sclazaro",
+            }, new User
+            {
+				UserId = 1,
+				FirstName = "Michael",
+				LastName = "Phelps",
+				Email = "mpphelps@gmail.com",
+				Password = "Password",
+				UserName = "mpphelps",
+			});
+		});
 
         OnModelCreatingPartial(modelBuilder);
     }

@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MikesKitchen.WebApi.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MikesKitchen.WebApi.Tests", "MikesKitchen.WebApi.Tests\MikesKitchen.WebApi.Tests.csproj", "{2B3E2128-EB0C-4D04-B3CC-B17E429BD5F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikesKitchen.Common.Core", "MikesKitchen.Common.Core\MikesKitchen.Common.Core.csproj", "{69B81C44-18F8-470E-936E-D9997B5F3DA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MikesKitchen.Common.Core", "MikesKitchen.Common.Core\MikesKitchen.Common.Core.csproj", "{69B81C44-18F8-470E-936E-D9997B5F3DA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

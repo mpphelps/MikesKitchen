@@ -1,0 +1,12 @@
+﻿https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/managing?tabs=vs
+
+Add-Migration <NameOfMigration>
+	When make database table changes or adding seed data to the DB context, use this to create 
+	a migration that can be used to the update the database with the changes
+
+Update-Database <OptionalMigrationName>
+	Note: Can optionally specify migration to migrate to (up or down)>
+
+Remove-Migration 
+	Note: This deletes all migrations above the current migration we are at.
+
