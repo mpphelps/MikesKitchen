@@ -1,22 +1,27 @@
 ﻿using MikesKitchen.Common.Core.Interfaces;
 using MikesKitchen.Common.DataContext.SqlServer.Interfaces;
 using MikesKitchen.Common.EntityModels.SqlServer;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MikesKitchen.Common.Core.Services;
 
-public class UserService : IUserService
+public class UnitService : IUnitService
 {
-	private IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
-        {
-		_userRepository = userRepository;
+	private IUnitRepository _UnitRepository;
+	public UnitService(IUnitRepository UnitRepository)
+	{
+		_UnitRepository = UnitRepository;
 
 	}
-        public User Create(User user)
+	public Unit Create(Unit Unit)
 	{
 		try
 		{
-			return _userRepository.Create(user);
+			return _UnitRepository.Create(Unit);
 		}
 		catch (Exception)
 		{
@@ -25,11 +30,11 @@ public class UserService : IUserService
 		}
 	}
 
-	public IEnumerable<User> GetAll()
+	public IEnumerable<Unit> GetAll()
 	{
 		try
 		{
-			return _userRepository.GetAll();
+			return _UnitRepository.GetAll();
 		}
 		catch (Exception)
 		{
@@ -38,11 +43,11 @@ public class UserService : IUserService
 		}
 	}
 
-	public User Get(int id)
+	public Unit Get(int id)
 	{
 		try
 		{
-			return _userRepository.Get(id);
+			return _UnitRepository.Get(id);
 		}
 		catch (Exception)
 		{
@@ -51,11 +56,11 @@ public class UserService : IUserService
 		}
 	}
 
-	public User Update(User user)
+	public Unit Update(Unit Unit)
 	{
 		try
 		{
-			return _userRepository.Update(user);
+			return _UnitRepository.Update(Unit);
 		}
 		catch (Exception)
 		{
@@ -68,12 +73,12 @@ public class UserService : IUserService
 	{
 		try
 		{
-			return _userRepository.Delete(id);
+			return _UnitRepository.Delete(id);
 		}
 		catch (Exception)
 		{
 			// todo: add logger here
 			throw;
 		}
-	}		
+	}
 }
