@@ -30,10 +30,5 @@ public partial class User
     [StringLength(50)]
     public string UserName { get; set; } = null!;
 
-    [InverseProperty("User")]
-    public virtual ICollection<Recipe> RecipesNavigation { get; set; } = new List<Recipe>();
-
-    [ForeignKey("UserId")]
-    [InverseProperty("Users")]
-    public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
+	public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
 }

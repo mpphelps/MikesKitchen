@@ -35,15 +35,14 @@ public partial class MikesKitchenContext : DbContext
         {
             entity.HasKey(e => e.RecipeId).HasName("PK__Recipes__FDD988B08DADB37A");
 
-            //entity.Property(e => e.RecipeId).ValueGeneratedNever();
+			//entity.Property(e => e.RecipeId).ValueGeneratedNever();
 
-            entity.HasOne(d => d.ServesDescriptor).WithMany(p => p.Recipes)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ServesID");
+			entity.HasOne(d => d.ServesDescriptor);
 
-            entity.HasOne(d => d.User).WithMany(p => p.RecipesNavigation)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_UserId");
+			entity.HasOne(r => r.User)
+			.WithMany(u => u.Recipes)
+			.HasForeignKey(r => r.UserId)
+			.OnDelete(DeleteBehavior.ClientSetNull);
 
             entity.HasData(new Recipe
             {
@@ -61,13 +60,7 @@ public partial class MikesKitchenContext : DbContext
         {
             entity.HasKey(e => new { e.RecipeId, e.IngredientId }).HasName("PK_RecipeIngredient");
 
-            entity.HasOne(d => d.Recipe).WithMany(p => p.RecipeIngredients)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_RecipeIngredients_RecipeId");
-
-            entity.HasOne(d => d.Unit).WithMany(p => p.RecipeIngredients)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_RecipeIngredients_UnitId");
+			entity.HasOne(d => d.Unit);
 
 			entity.HasData(new RecipeIngredient
 			{
@@ -130,10 +123,6 @@ public partial class MikesKitchenContext : DbContext
         modelBuilder.Entity<RecipeStep>(entity =>
         {
             entity.HasKey(e => new { e.RecipeId, e.StepId }).HasName("PK_RecipeStep");
-
-            entity.HasOne(d => d.Recipe).WithMany(p => p.RecipeSteps)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_RecipeSteps_RecipeId");
 
 			entity.HasData(new RecipeStep
 			{
@@ -294,26 +283,14 @@ public partial class MikesKitchenContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            //entity.Property(e => e.UserId).ValueGeneratedNever();
+			//entity.Property(e => e.UserId).ValueGeneratedNever();
 
-            entity.HasMany(d => d.Recipes).WithMany(p => p.Users)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Favorite",
-                    r => r.HasOne<Recipe>().WithMany()
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_RecipeFavorites_RecipeId"),
-                    l => l.HasOne<User>().WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_RecipeFavorites_UserId"),
-                    j =>
-                    {
-                        j.HasKey("UserId", "RecipeId").HasName("PK_RecipeFavorites");
-                        j.ToTable("Favorites");
-                    });
+			entity.HasMany(u => u.Recipes)
+			.WithOne(r => r.User)
+			.HasForeignKey(u => u.UserId)
+			.OnDelete(DeleteBehavior.Restrict);
 
-            entity.HasData(new User
+			entity.HasData(new User
             {
                 UserId = 2,
                 FirstName = "Sofia",

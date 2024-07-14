@@ -23,11 +23,6 @@ public partial class RecipeIngredient
     [Column("UnitID")]
     public int UnitId { get; set; }
 
-    [ForeignKey("RecipeId")]
-    [InverseProperty("RecipeIngredients")]
-    public virtual Recipe Recipe { get; set; } = null!;
-
     [ForeignKey("UnitId")]
-    [InverseProperty("RecipeIngredients")]
     public virtual Unit Unit { get; set; } = null!;
 }

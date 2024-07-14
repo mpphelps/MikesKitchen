@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MikesKitchen.Common.DataContext.SqlServer;
 
@@ -10,9 +11,11 @@ using MikesKitchen.Common.DataContext.SqlServer;
 namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 {
     [DbContext(typeof(MikesKitchenContext))]
-    partial class MikesKitchenContextModelSnapshot : ModelSnapshot
+    [Migration("20240714142108_RemovedUserFavoritesForNow")]
+    partial class RemovedUserFavoritesForNow
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Recipes", (string)null);
+                    b.ToTable("Recipes");
 
                     b.HasData(
                         new
@@ -99,7 +102,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("RecipeIngredients", (string)null);
+                    b.ToTable("RecipeIngredients");
 
                     b.HasData(
                         new
@@ -179,7 +182,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
                     b.HasKey("RecipeId", "StepId")
                         .HasName("PK_RecipeStep");
 
-                    b.ToTable("RecipeSteps", (string)null);
+                    b.ToTable("RecipeSteps");
 
                     b.HasData(
                         new
@@ -261,7 +264,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
                     b.HasKey("ServesDescriptorId")
                         .HasName("PK__ServesDe__F4B29F657004D445");
 
-                    b.ToTable("ServesDescriptors", (string)null);
+                    b.ToTable("ServesDescriptors");
 
                     b.HasData(
                         new
@@ -292,7 +295,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 
                     b.HasKey("UnitId");
 
-                    b.ToTable("Units", (string)null);
+                    b.ToTable("Units");
 
                     b.HasData(
                         new
@@ -402,7 +405,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
@@ -436,8 +439,8 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
                     b.HasOne("MikesKitchen.Common.EntityModels.SqlServer.User", "User")
                         .WithMany("Recipes")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_UserId");
 
                     b.Navigation("ServesDescriptor");
 

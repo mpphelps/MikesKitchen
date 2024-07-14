@@ -27,21 +27,13 @@ public partial class Recipe
     [Column(TypeName = "image")]
     public byte[]? Photo { get; set; }
 
-    [InverseProperty("Recipe")]
     public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 
-    [InverseProperty("Recipe")]
     public virtual ICollection<RecipeStep> RecipeSteps { get; set; } = new List<RecipeStep>();
 
     [ForeignKey("ServesDescriptorId")]
-    [InverseProperty("Recipes")]
     public virtual ServesDescriptor ServesDescriptor { get; set; } = null!;
 
     [ForeignKey("UserId")]
-    [InverseProperty("RecipesNavigation")]
-    public virtual User User { get; set; } = null!;
-
-    [ForeignKey("RecipeId")]
-    [InverseProperty("Recipes")]
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
+	public virtual User User { get; set; } = null!;
 }

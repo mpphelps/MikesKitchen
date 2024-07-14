@@ -1,4 +1,5 @@
-﻿using MikesKitchen.Common.DataContext.SqlServer.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using MikesKitchen.Common.DataContext.SqlServer.Interfaces;
 using MikesKitchen.Common.EntityModels.SqlServer;
 using System;
 using System.Collections.Generic;
@@ -58,12 +59,21 @@ public class RecipeRepository : IRecipeRepository
 
 	public Recipe Get(int id)
 	{
-		Recipe Recipe;
 		using (MikesKitchenContext db = new MikesKitchenContext())
 		{
-			Recipe = db.Recipes.First(u => u.RecipeId == id);
+			var recipe = db.Recipes
+				.Include(r => r.ServesDescriptor)
+				.Include(r => r.RecipeSteps)
+				.Include(r => r.RecipeIngredients).ThenInclude(ri => ri.Unit)
+				.FirstOrDefault(r => r.RecipeId == id);
+
+			if (recipe == null)
+			{
+				throw new Exception($"Recipe with ID {id} not found.");
+			}
+
+			return recipe;
 		}
-		return Recipe;
 	}
 
 	public Recipe Update(Recipe Recipe)

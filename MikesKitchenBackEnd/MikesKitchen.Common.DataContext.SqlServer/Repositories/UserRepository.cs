@@ -57,7 +57,8 @@ public class UserRepository : IUserRepository
 		User user;
 		using (MikesKitchenContext db = new MikesKitchenContext())
 		{
-			user = db.Users.First(u => u.UserId == id);
+			user = db.Users
+				.First(u => u.UserId == id);
 		}
 		return user;
 	}

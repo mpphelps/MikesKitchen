@@ -20,8 +20,4 @@ public partial class RecipeStep
 
     [Column(TypeName = "image")]
     public byte[]? Photo { get; set; }
-
-    [ForeignKey("RecipeId")]
-    [InverseProperty("RecipeSteps")]
-    public virtual Recipe Recipe { get; set; } = null!;
 }

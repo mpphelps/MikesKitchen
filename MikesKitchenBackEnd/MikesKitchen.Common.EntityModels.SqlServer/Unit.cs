@@ -14,7 +14,4 @@ public partial class Unit
 
     [StringLength(10)]
     public string UnitDescriptor { get; set; } = null!;
-
-    [InverseProperty("Unit")]
-    public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 }

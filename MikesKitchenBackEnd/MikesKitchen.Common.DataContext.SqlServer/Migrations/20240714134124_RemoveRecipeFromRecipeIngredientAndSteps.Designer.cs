@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MikesKitchen.Common.DataContext.SqlServer;
 
@@ -10,9 +11,11 @@ using MikesKitchen.Common.DataContext.SqlServer;
 namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 {
     [DbContext(typeof(MikesKitchenContext))]
-    partial class MikesKitchenContextModelSnapshot : ModelSnapshot
+    [Migration("20240714134124_RemoveRecipeFromRecipeIngredientAndSteps")]
+    partial class RemoveRecipeFromRecipeIngredientAndSteps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,6 +23,22 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Favorite", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RecipeId")
+                        .HasName("PK_RecipeFavorites");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("Favorites", (string)null);
+                });
 
             modelBuilder.Entity("MikesKitchen.Common.EntityModels.SqlServer.Recipe", b =>
                 {
@@ -59,7 +78,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Recipes", (string)null);
+                    b.ToTable("Recipes");
 
                     b.HasData(
                         new
@@ -99,7 +118,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("RecipeIngredients", (string)null);
+                    b.ToTable("RecipeIngredients");
 
                     b.HasData(
                         new
@@ -179,7 +198,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
                     b.HasKey("RecipeId", "StepId")
                         .HasName("PK_RecipeStep");
 
-                    b.ToTable("RecipeSteps", (string)null);
+                    b.ToTable("RecipeSteps");
 
                     b.HasData(
                         new
@@ -261,7 +280,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
                     b.HasKey("ServesDescriptorId")
                         .HasName("PK__ServesDe__F4B29F657004D445");
 
-                    b.ToTable("ServesDescriptors", (string)null);
+                    b.ToTable("ServesDescriptors");
 
                     b.HasData(
                         new
@@ -292,7 +311,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 
                     b.HasKey("UnitId");
 
-                    b.ToTable("Units", (string)null);
+                    b.ToTable("Units");
 
                     b.HasData(
                         new
@@ -402,7 +421,7 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
@@ -425,19 +444,47 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
                         });
                 });
 
+            modelBuilder.Entity("RecipeUser", b =>
+                {
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RecipeId", "UserId");
+
+                    b.ToTable("RecipeUser");
+                });
+
+            modelBuilder.Entity("Favorite", b =>
+                {
+                    b.HasOne("MikesKitchen.Common.EntityModels.SqlServer.Recipe", null)
+                        .WithMany()
+                        .HasForeignKey("RecipeId")
+                        .IsRequired()
+                        .HasConstraintName("FK_RecipeFavorites_RecipeId");
+
+                    b.HasOne("MikesKitchen.Common.EntityModels.SqlServer.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .IsRequired()
+                        .HasConstraintName("FK_RecipeFavorites_UserId");
+                });
+
             modelBuilder.Entity("MikesKitchen.Common.EntityModels.SqlServer.Recipe", b =>
                 {
                     b.HasOne("MikesKitchen.Common.EntityModels.SqlServer.ServesDescriptor", "ServesDescriptor")
-                        .WithMany()
+                        .WithMany("Recipes")
                         .HasForeignKey("ServesDescriptorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_ServesID");
 
                     b.HasOne("MikesKitchen.Common.EntityModels.SqlServer.User", "User")
-                        .WithMany("Recipes")
+                        .WithMany("RecipesNavigation")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_UserId");
 
                     b.Navigation("ServesDescriptor");
 
@@ -477,9 +524,14 @@ namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
                     b.Navigation("RecipeSteps");
                 });
 
-            modelBuilder.Entity("MikesKitchen.Common.EntityModels.SqlServer.User", b =>
+            modelBuilder.Entity("MikesKitchen.Common.EntityModels.SqlServer.ServesDescriptor", b =>
                 {
                     b.Navigation("Recipes");
+                });
+
+            modelBuilder.Entity("MikesKitchen.Common.EntityModels.SqlServer.User", b =>
+                {
+                    b.Navigation("RecipesNavigation");
                 });
 #pragma warning restore 612, 618
         }
