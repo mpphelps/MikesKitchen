@@ -63,7 +63,7 @@ public class RecipeRepository : IRecipeRepository
 		using (MikesKitchenContext db = new MikesKitchenContext())
 		{
 			recipe = db.Recipes
-				//.Include(r => r.User)
+				.Include(r => r.User)
 				.Include(r => r.ServesDescriptor)
 				.Include(r => r.RecipeSteps)
 				.Include(r => r.RecipeIngredients).ThenInclude(ri => ri.Unit)
@@ -75,14 +75,14 @@ public class RecipeRepository : IRecipeRepository
 			}	
 		}
 
-		// todo need to fix making a second database call just to get the user
-		// for some reason, adding user to the query above gives an error
-		using (MikesKitchenContext db = new MikesKitchenContext())
-		{
-			var User = db.Users.First(u => u.UserId == recipe.UserId);
-			if (User != null)
-				recipe.User = User;
-		}
+		//// todo need to fix making a second database call just to get the user
+		//// for some reason, adding user to the query above gives an error
+		//using (MikesKitchenContext db = new MikesKitchenContext())
+		//{
+		//	var User = db.Users.First(u => u.UserId == recipe.UserId);
+		//	if (User != null)
+		//		recipe.User = User;
+		//}
 
 		return recipe;
 	}
