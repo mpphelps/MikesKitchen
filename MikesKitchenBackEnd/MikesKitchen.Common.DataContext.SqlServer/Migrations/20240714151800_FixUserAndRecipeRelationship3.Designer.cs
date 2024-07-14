@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MikesKitchen.Common.DataContext.SqlServer;
 
@@ -10,9 +11,11 @@ using MikesKitchen.Common.DataContext.SqlServer;
 namespace MikesKitchen.Common.DataContext.SqlServer.Migrations
 {
     [DbContext(typeof(MikesKitchenContext))]
-    partial class MikesKitchenContextModelSnapshot : ModelSnapshot
+    [Migration("20240714151800_FixUserAndRecipeRelationship3")]
+    partial class FixUserAndRecipeRelationship3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

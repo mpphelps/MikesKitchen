@@ -35,5 +35,6 @@ public partial class Recipe
     public virtual ServesDescriptor ServesDescriptor { get; set; } = null!;
 
     [ForeignKey("UserId")]
+	[InverseProperty("Recipes")]
 	public virtual User User { get; set; } = null!;
 }

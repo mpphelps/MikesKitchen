@@ -285,11 +285,6 @@ public partial class MikesKitchenContext : DbContext
         {
 			//entity.Property(e => e.UserId).ValueGeneratedNever();
 
-			entity.HasMany(u => u.Recipes)
-			.WithOne(r => r.User)
-			.HasForeignKey(u => u.UserId)
-			.OnDelete(DeleteBehavior.Restrict);
-
 			entity.HasData(new User
             {
                 UserId = 2,

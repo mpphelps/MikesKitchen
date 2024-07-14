@@ -59,9 +59,11 @@ public class RecipeRepository : IRecipeRepository
 
 	public Recipe Get(int id)
 	{
+		Recipe? recipe;
 		using (MikesKitchenContext db = new MikesKitchenContext())
 		{
-			var recipe = db.Recipes
+			recipe = db.Recipes
+				//.Include(r => r.User)
 				.Include(r => r.ServesDescriptor)
 				.Include(r => r.RecipeSteps)
 				.Include(r => r.RecipeIngredients).ThenInclude(ri => ri.Unit)
@@ -70,10 +72,19 @@ public class RecipeRepository : IRecipeRepository
 			if (recipe == null)
 			{
 				throw new Exception($"Recipe with ID {id} not found.");
-			}
-
-			return recipe;
+			}	
 		}
+
+		// todo need to fix making a second database call just to get the user
+		// for some reason, adding user to the query above gives an error
+		using (MikesKitchenContext db = new MikesKitchenContext())
+		{
+			var User = db.Users.First(u => u.UserId == recipe.UserId);
+			if (User != null)
+				recipe.User = User;
+		}
+
+		return recipe;
 	}
 
 	public Recipe Update(Recipe Recipe)
