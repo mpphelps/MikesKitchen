@@ -17,37 +17,42 @@ namespace MikesKitchen.WebApi.Controllers
 		}
 		// GET: api/<RecipeController>
 		[HttpGet]
-		public IEnumerable<Recipe> Get()
+		public ActionResult<List<Recipe>> Get()
 		{
-			return _RecipeService.GetAll();
+			var recipes = _RecipeService.GetAll().ToList();
+			return Ok(recipes);
 		}
 
 		// GET api/<RecipeController>/5
 		[HttpGet("{id}")]
-		public Recipe Get(int id)
+		public ActionResult<Recipe> Get(int id)
 		{
-			return _RecipeService.Get(id);
+			var recipe = _RecipeService.Get(id);
+			return Ok(recipe);
 		}
 
 		// POST api/<RecipeController>
 		[HttpPost]
-		public void Post([FromBody] Recipe Recipe)
+		public ActionResult Post([FromBody] Recipe Recipe)
 		{
 			_RecipeService.Create(Recipe);
+			return Ok();
 		}
 
 		// PUT api/<RecipeController>/5
 		[HttpPut]
-		public void Put([FromBody] Recipe Recipe)
+		public ActionResult Put([FromBody] Recipe Recipe)
 		{
 			_RecipeService.Update(Recipe);
+			return Ok();
 		}
 
 		// DELETE api/<RecipeController>/5
 		[HttpDelete("{id}")]
-		public void Delete(int id)
+		public ActionResult Delete(int id)
 		{
 			_RecipeService.Delete(id);
+			return Ok();
 		}
 	}
 }

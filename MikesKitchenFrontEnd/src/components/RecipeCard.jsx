@@ -1,10 +1,11 @@
 import React from 'react'
 import '../styles/RecipeCard.css'
 
-const RecipeCard = ({title}) => {
+const RecipeCard = ({recipe}) => {
   return (
     <div className='recipe-card'>
-      {title}
+      <img src={recipe.pictureUrl} alt={recipe.name}/>
+      <div>{recipe.title}</div>
     </div>
   )
 }

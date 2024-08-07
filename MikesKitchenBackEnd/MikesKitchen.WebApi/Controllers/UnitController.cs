@@ -17,37 +17,42 @@ namespace MikesKitchen.WebApi.Controllers
 		}
 		// GET: api/<UnitController>
 		[HttpGet]
-		public IEnumerable<Unit> Get()
+		public ActionResult<List<Unit>> Get()
 		{
-			return _UnitService.GetAll();
+			var units = _UnitService.GetAll().ToList();
+			return Ok(units);
 		}
 
 		// GET api/<UnitController>/5
 		[HttpGet("{id}")]
-		public Unit Get(int id)
+		public ActionResult<Unit> Get(int id)
 		{
-			return _UnitService.Get(id);
+			var unit = _UnitService.Get(id);
+			return Ok(unit);
 		}
 
 		// POST api/<UnitController>
 		[HttpPost]
-		public void Post([FromBody] Unit Unit)
+		public ActionResult Post([FromBody] Unit Unit)
 		{
 			_UnitService.Create(Unit);
+			return Ok();
 		}
 
 		// PUT api/<UnitController>/5
 		[HttpPut]
-		public void Put([FromBody] Unit Unit)
+		public ActionResult Put([FromBody] Unit Unit)
 		{
 			_UnitService.Update(Unit);
+			return Ok();
 		}
 
 		// DELETE api/<UnitController>/5
 		[HttpDelete("{id}")]
-		public void Delete(int id)
+		public ActionResult Delete(int id)
 		{
 			_UnitService.Delete(id);
+			return Ok();
 		}
 	}
 }

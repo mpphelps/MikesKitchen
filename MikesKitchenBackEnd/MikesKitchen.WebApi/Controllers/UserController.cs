@@ -21,37 +21,42 @@ namespace MikesKitchen.WebApi.Controllers
 		}
 		// GET: api/<UserController>
 		[HttpGet]
-		public IEnumerable<User> Get()
+		public ActionResult<List<User>> Get()
 		{
-			return _userService.GetAll();
+			var users = _userService.GetAll();
+			return Ok(users);
 		}
 
 		// GET api/<UserController>/5
 		[HttpGet("{id}")]
-		public User Get(int id)
+		public ActionResult<User> Get(int id)
 		{
-			return _userService.Get(id);
+			var user = _userService.Get(id);
+			return Ok(user);
 		}
 
 		// POST api/<UserController>
 		[HttpPost]
-		public void Post([FromBody] User user)
+		public ActionResult Post([FromBody] User user)
 		{
 			_userService.Create(user);
+			return Ok();
 		}
 
 		// PUT api/<UserController>/5
 		[HttpPut]
-		public void Put([FromBody] User user)
+		public ActionResult Put([FromBody] User user)
 		{
 			_userService.Update(user);
+			return Ok();
 		}
 
 		// DELETE api/<UserController>/5
 		[HttpDelete("{id}")]
-		public void Delete(int id)
+		public ActionResult Delete(int id)
 		{
 			_userService.Delete(id);
+			return Ok();
 		}
 	}
 }
